@@ -1,14 +1,17 @@
-import tailwindcss from '@tailwindcss/vite'
 import packageJson from './package.json'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  devServer: {
+    host: '0.0.0.0',
+  },
   modules: [
     '@nuxt/a11y',
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/hints',
     '@nuxt/icon',
+    '@nuxt/ui',
     '@nuxt/scripts',
     '@nuxt/test-utils',
     '@nuxtjs/device',
@@ -28,7 +31,7 @@ export default defineNuxtConfig({
     nitro: {
       openAPI: {
         meta: {
-          title: 'NuxtTemplate API',
+          title: 'Watchmytools API',
           version: packageJson.version,
         },
       },
@@ -37,31 +40,12 @@ export default defineNuxtConfig({
       },
     },
     vite: {
-      plugins: [
-        tailwindcss(),
-      ],
       server: {
         allowedHosts: true,
       },
     },
     security: {
-      enabled: true,
-      removeLoggers: false,
-      sri: false,
-      rateLimiter: false,
-      csrf: {
-        enabled: false,
-      },
-      headers: {
-        contentSecurityPolicy: false, // Prevents Vite HMR from breaking
-        strictTransportSecurity: false, // Prevents locking localhost to HTTPS
-      },
-      corsHandler: {
-        origin: '*', // Easy local API testing
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-        allowHeaders: ['Content-Type', 'Authorization'],
-        credentials: true,
-      },
+      enabled: false,
     },
   },
 
@@ -219,6 +203,7 @@ export default defineNuxtConfig({
       '/api/payments/sepay/webhook': { cors: false, csurf: false },
       '/api/auth/**': { cors: false, csurf: false },
       '/api/cron/**': { cors: false, csurf: false },
+      '/api/webhooks/**': { cors: false, csurf: false },
     },
     serverAssets: [
       {

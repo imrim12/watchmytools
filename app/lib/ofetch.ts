@@ -41,10 +41,14 @@ export const $http = $fetch.create({
       }
     }
 
-    const csrfConfig = useCsrf()
-    options.headers = {
-      ...options.headers,
-      [csrfConfig.headerName]: csrfConfig.csrf,
+    // @ts-expect-error useCsrf is not defined when security: false
+    if (typeof useCsrf !== 'undefined') {
+      // @ts-expect-error
+      const csrfConfig = useCsrf()
+      options.headers = {
+        ...options.headers,
+        [csrfConfig.headerName]: csrfConfig.csrf,
+      }
     }
   },
   onResponse(context) {

@@ -10,6 +10,14 @@ export default withNuxt(
     vue: true,
   }),
   {
+    files: ['**/package.json', 'pnpm-workspace.yaml'],
+    rules: {
+      'pnpm/json-enforce-catalog': 'error',
+      'pnpm/json-prefer-workspace-settings': 'error',
+      'pnpm/json-valid-catalog': 'error',
+    },
+  },
+  {
     rules: {
       'ts/no-explicit-any': 'off',
       'ts/prefer-literal-enum-member': 'off',
@@ -32,6 +40,14 @@ export default withNuxt(
     },
   },
   {
-    ignores: ['node_modules', '.nuxt', '.agents', '.agent', '.docker', 'dist'],
+    ignores: [
+      '**/node_modules/**',
+      '**/.nuxt/**',
+      '**/.nitro/**',
+      '.claude',
+      '.agents',
+      '.docker',
+      'dist',
+    ],
   },
 )
