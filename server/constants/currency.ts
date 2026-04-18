@@ -1,0 +1,1 @@
+export const CURRENCY_CONVERSION_FEE = 1.01
